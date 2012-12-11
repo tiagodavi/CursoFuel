@@ -1,4 +1,4 @@
-#FuelPHP
+#MiniCurso Online: FuelPHP - Uso do combustível na prática
 
 * Version: 1.4
 * [Website](http://fuelphp.com/)
