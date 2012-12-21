@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_general_ci">curso_fuel</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="fornecedores" view="colnames">
+<left>38</left>
+<top>78</top>
+<width>159</width>
+<height>170</height>
+<sql_create_table>CREATE TABLE `fornecedores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` char(100) NOT NULL,
+  `codigo` char(50) NOT NULL,
+  `senha` char(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fornecedores_codigo` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="produtos" view="colnames">
+<left>295</left>
+<top>61</top>
+<width>125</width>
+<height>175</height>
+<sql_create_table>CREATE TABLE `produtos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fornecedor_id` int(11) NOT NULL,
+  `codigo` char(50) NOT NULL,
+  `nome` char(100) NOT NULL,
+  `valor` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `estoque` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `produtos_codigo` (`codigo`),
+  KEY `produtos_fornecedor_id` (`fornecedor_id`),
+  CONSTRAINT `produtos_fornecedor_id` FOREIGN KEY (`fornecedor_id`) REFERENCES `fornecedores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="vendas" view="colnames">
+<left>518</left>
+<top>48</top>
+<width>107</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `vendas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `produto_id` int(11) NOT NULL,
+  `status` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `vendas_produto_id` (`produto_id`),
+  CONSTRAINT `vendas_produto_id` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
